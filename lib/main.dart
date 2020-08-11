@@ -39,10 +39,28 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Card(
-            color: Colors.red,
-            child: Text('List of text'),
-          )
+          Column(
+              children: transactions.map((tx) {
+            return Card(
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 2)),
+                    child: Text(tx.amount.toString()),
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text(tx.title),
+                      Text(tx.date.toString())
+                    ],
+                  )
+                ],
+              ),
+            );
+          }).toList())
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import './transaction.dart';
 import 'package:intl/intl.dart';
 
@@ -7,6 +8,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting('ja');
     return MaterialApp(
       title: 'Flutter App',
       home: MyHomePage(),
@@ -68,7 +70,7 @@ class MyHomePage extends StatelessWidget {
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        tx.date.toString(),
+                        DateFormat.yMMMd('ja').format(tx.date),
                         style: TextStyle(color: Colors.grey),
                       )
                     ],

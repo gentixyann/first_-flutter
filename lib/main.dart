@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import './transaction.dart';
+import 'models/transaction.dart';
 import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
@@ -59,10 +59,12 @@ class MyHomePage extends StatelessWidget {
                     // onChanged: (val) {
                     //   titleInput = val;
                     // },
+                    controller: titleController,
                   ),
                   TextField(
                     decoration: InputDecoration(labelText: '金額'),
                     // onChanged: (val) => amountInput = val,
+                    controller: amountController,
                   ),
                   FlatButton(
                     child: Text('Add transaction'),

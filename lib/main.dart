@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     initializeDateFormatting('ja');
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Persona Expenses',
+      theme: ThemeData(primarySwatch: Colors.red, accentColor: Colors.amber),
       home: MyHomePage(),
     );
   }
@@ -60,7 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Text('Persona Expenses'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -76,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: double.infinity,
               child: Card(
-                color: Colors.blue,
+                color: Theme.of(context).primaryColor,
                 child: Text('chart!!'),
                 elevation: 5,
               ),

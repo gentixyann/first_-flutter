@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
     initializeDateFormatting('ja');
     return MaterialApp(
       title: 'Persona Expenses',
-      theme: ThemeData(primarySwatch: Colors.red, accentColor: Colors.amber),
+      theme: ThemeData(
+          primarySwatch: Colors.red,
+          accentColor: Colors.amber,
+          fontFamily: 'Quicksand'),
       home: MyHomePage(),
     );
   }

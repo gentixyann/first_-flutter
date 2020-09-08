@@ -21,13 +21,13 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
-                  fontFamily: 'OpenSans',
+                  // fontFamily: 'OpenSans',
                   fontSize: 18,
                   fontWeight: FontWeight.bold)),
           appBarTheme: AppBarTheme(
               textTheme: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
-                      fontFamily: 'OpenSans',
+                      // fontFamily: 'OpenSans',
                       fontSize: 20,
                       fontWeight: FontWeight.bold)))),
       home: MyHomePage(),

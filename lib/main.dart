@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:personal/widgets/chart.dart';
 import 'package:personal/widgets/new_transaction.dart';
 import 'package:personal/widgets/transaction_list.dart';
 
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   @override
+  // 識別子がアンダースコア（_）で始まる場合、その識別子はプライベートです。
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -47,6 +49,16 @@ class _MyHomePageState extends State<MyHomePage> {
     // Transaction(
     //     id: 't2', title: 'new gril2', amount: 50.00, date: DateTime.now()),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -91,14 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Theme.of(context).primaryColor,
-                child: Text('chart!!'),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ),

@@ -9,21 +9,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
-          primarySwatch: Colors.pink,
-          accentColor: Colors.amber,
-          canvasColor: Color.fromRGBO(255, 254, 229, 1),
-          fontFamily: 'Raleway',
-          textTheme: ThemeData.light().textTheme.copyWith(
-              body1: TextStyle(
-                color: Color.fromRGBO(20, 50, 50, 1),
-              ),
-              body2: TextStyle(
-                color: Color.fromRGBO(20, 50, 50, 1),
-              ),
-              title: TextStyle(
-                fontSize: 24,
-                fontFamily: 'RobotoCondensed',
-              ))),
+        primarySwatch: Colors.pink,
+        accentColor: Colors.amber,
+        canvasColor: Color.fromRGBO(255, 254, 229, 1),
+        fontFamily: 'Raleway',
+        textTheme: ThemeData.light().textTheme.copyWith(
+            body1: TextStyle(
+              color: Color.fromRGBO(20, 50, 50, 1),
+            ),
+            body2: TextStyle(
+              color: Color.fromRGBO(20, 50, 50, 1),
+            ),
+            title: TextStyle(
+              fontSize: 24,
+              fontFamily: 'RobotoCondensed',
+              fontWeight: FontWeight.bold,
+            )),
+      ),
       home: CategorieSscreen(),
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../dummy_data.dart';
 import '../widgets/category_item.dart';
 
-class CategorieSscreen extends StatelessWidget {
+class CategorieScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView(

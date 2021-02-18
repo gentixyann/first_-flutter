@@ -8,6 +8,25 @@ class ProductOverviewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('MyShop'),
+        actions: <Widget>[
+          PopupMenuButton(
+              onSelected: (int selectedValue) {
+                print(selectedValue);
+              },
+              icon: Icon(
+                Icons.more_vert,
+              ),
+              itemBuilder: (_) => [
+                    PopupMenuItem(
+                      child: Text('Only Favorite'),
+                      value: 0,
+                    ),
+                    PopupMenuItem(
+                      child: Text('Show All'),
+                      value: 1,
+                    ),
+                  ])
+        ],
       ),
       body: ProductsGrid(),
     );

@@ -21,8 +21,18 @@ class Cart with ChangeNotifier {
     return {...items};
   }
 
+// itemの数を返す
   int get itemCount {
     return _items.length;
+  }
+
+// 合計金額を返す
+  double get totalAmount {
+    var total = 0.0;
+    _items.forEach((key, cartItem) {
+      total += cartItem.price * cartItem.quantity;
+    });
+    return total;
   }
 
   void addItem(String productId, double price, String title) {

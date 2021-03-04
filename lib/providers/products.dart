@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import './product.dart';
 
 class Products with ChangeNotifier {
@@ -72,6 +73,7 @@ class Products with ChangeNotifier {
       id: DateTime.now().toString(),
     );
     _items.add(newProduct);
+    // _items.insert(0, newProduct); // at the start of the list
     notifyListeners();
   }
 

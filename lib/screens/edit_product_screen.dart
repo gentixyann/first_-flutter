@@ -26,8 +26,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   );
   var _initValues = {
     'title': '',
-    'price': '',
     'description': '',
+    'price': '',
     'imageUrl': '',
   };
   var _isInit = true;
@@ -47,9 +47,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
             Provider.of<Products>(context, listen: false).findById(productId);
         _initValues = {
           'title': _editedProduct.title,
-          'price': _editedProduct.price.toString(),
           'description': _editedProduct.description,
+          'price': _editedProduct.price.toString(),
           // 'imageUrl': _editedProduct.imageUrl,
+          'imageUrl': '',
         };
         _imageUrlController.text = _editedProduct.imageUrl;
       }
@@ -70,9 +71,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   void _updateImageUrl() {
     if (!_imageUrlFocusNode.hasFocus) {
-      if (_imageUrlController.text.isEmpty ||
-          _imageUrlController.text.startsWith('http') &&
-              _imageUrlController.text.startsWith('https')) {
+      if ((!_imageUrlController.text.startsWith('http') &&
+              !_imageUrlController.text.startsWith('https')) ||
+          (!_imageUrlController.text.endsWith('.png') &&
+              !_imageUrlController.text.endsWith('.jpg') &&
+              !_imageUrlController.text.endsWith('.jpeg'))) {
         return;
       }
       setState(() {});
@@ -107,16 +110,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _form,
           child: ListView(
             children: <Widget>[
               TextFormField(
                 initialValue: _initValues['title'],
-                decoration: InputDecoration(
-                  labelText: 'Title',
-                ),
+                decoration: InputDecoration(labelText: 'Title'),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_priceFocusNode);
@@ -129,13 +130,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 },
                 onSaved: (value) {
                   _editedProduct = Product(
-                    title: value,
-                    price: _editedProduct.price,
-                    description: _editedProduct.description,
-                    imageUrl: _editedProduct.imageUrl,
-                    id: _editedProduct.id,
-                    isFavorite: _editedProduct.isFavorite,
-                  );
+                      title: value,
+                      price: _editedProduct.price,
+                      description: _editedProduct.description,
+                      imageUrl: _editedProduct.imageUrl,
+                      id: _editedProduct.id,
+                      isFavorite: _editedProduct.isFavorite);
                 },
               ),
               TextFormField(
@@ -161,13 +161,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 },
                 onSaved: (value) {
                   _editedProduct = Product(
-                    title: _editedProduct.title,
-                    price: double.parse(value),
-                    description: _editedProduct.description,
-                    imageUrl: _editedProduct.imageUrl,
-                    id: _editedProduct.id,
-                    isFavorite: _editedProduct.isFavorite,
-                  );
+                      title: _editedProduct.title,
+                      price: double.parse(value),
+                      description: _editedProduct.description,
+                      imageUrl: _editedProduct.imageUrl,
+                      id: _editedProduct.id,
+                      isFavorite: _editedProduct.isFavorite);
                 },
               ),
               TextFormField(
@@ -180,7 +179,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   if (value.isEmpty) {
                     return 'Please enter a description.';
                   }
-                  if (value.length < 5) {
+                  if (value.length < 10) {
                     return 'Should be at least 10 characters long.';
                   }
                   return null;
@@ -207,10 +206,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       right: 10,
                     ),
                     decoration: BoxDecoration(
-                        border: Border.all(
-                      width: 1,
-                      color: Colors.grey,
-                    )),
+                      border: Border.all(
+                        width: 1,
+                        color: Colors.grey,
+                      ),
+                    ),
                     child: _imageUrlController.text.isEmpty
                         ? Text('Enter a URL')
                         : FittedBox(
@@ -222,19 +222,27 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   ),
                   Expanded(
                     child: TextFormField(
-                      // initialValue: _initValues['imageUrl'],
                       decoration: InputDecoration(labelText: 'Image URL'),
                       keyboardType: TextInputType.url,
                       textInputAction: TextInputAction.done,
                       controller: _imageUrlController,
-                      // focusNode: _imageUrlFocusNode,
-                      onEditingComplete: () {
-                        setState(() {});
-                      },
+                      focusNode: _imageUrlFocusNode,
                       onFieldSubmitted: (_) {
                         _saveForm();
                       },
                       validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter an image URL.';
+                        }
+                        if (!value.startsWith('http') &&
+                            !value.startsWith('https')) {
+                          return 'Please enter a valid URL.';
+                        }
+                        if (!value.endsWith('.png') &&
+                            !value.endsWith('.jpg') &&
+                            !value.endsWith('.jpeg')) {
+                          return 'Please enter a valid image URL.';
+                        }
                         return null;
                       },
                       onSaved: (value) {
@@ -250,7 +258,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
